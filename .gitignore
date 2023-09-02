@@ -1,0 +1,7 @@
+#paths
+/cmake-build-debug/
+
+#files
+
+*.CMakeLists.txt
+*..txt
