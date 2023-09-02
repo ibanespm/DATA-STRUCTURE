@@ -1,6 +1,6 @@
 #paths
 /cmake-build-debug/
-
+/.idea/
 #files
 
 *.CMakeLists.txt
