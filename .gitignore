@@ -4,4 +4,5 @@
 #files
 
 *.CMakeLists.txt
-*..txt
+*.txt
+*.idea
