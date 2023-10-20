@@ -3,4 +3,4 @@ project(DATA_STRUCTURE)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(DATA_STRUCTURE main.cpp ARRAY-CIRCULAR/CircularArray.h tester.h)
+add_executable(DATA_STRUCTURE main.cpp ARRAY-CIRCULAR/CircularArray.h )

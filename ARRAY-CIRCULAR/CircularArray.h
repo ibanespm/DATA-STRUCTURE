@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -13,35 +14,30 @@ private:
 public:
     CircularArray();
     CircularArray<T>(int _capacity=10);
-
-
-
     void push_front(T data); //ok
     void push_back(T data);  //ok
-    void pop_front( );
-    void pop_back( );
-    void insert(T data);
-    bool is_empty();
-    bool is_full();
-    void resize();
-    int size();
-    void clear(); // listo
-    T& operator[](int);
+    void pop_front( ); //ok
+    void pop_back( ); //ok
+    void insert(T data, int position);
+    bool is_empty(); //ok
+    bool is_full(); //ok
+    void resize(); //ok
+    int size();//ok
+    void clear(); //ok
+    T& operator[](const int position); //ok
     void sort();
     bool is_sorted();
-    void reverse();
-    int getcapacity(){return capacity;}
-
-
-    string to_string(string sep=" ");
+    void reverse(); //ok
+    int getcapacity(){return capacity;} //ok
+    string to_string(string sep=" ");  //ok
 
 private:
     int next(int);
     int prev(int);
-
-
-
 };
+
+
+
 template<typename T>
 CircularArray<T>::CircularArray(int capacity){
     this->capacity=capacity;
@@ -130,11 +126,14 @@ void CircularArray<T>::pop_back(){
     }
 }
 
-//template<typename T>
-//
-//void CircularArray<T>::insert(T data){
-//
-//}
+template<typename T>
+
+void CircularArray<T>::insert(T data, int position){
+    if ((position < 0) || ( position > capacity)) throw "Position invalue";
+
+
+
+}
 
 
 template<typename T>
@@ -192,6 +191,54 @@ void CircularArray<T>::resize(){
     this->front=0;
 
 }
+
+template<typename T>
+void CircularArray<T>::clear() {
+    if(!is_empty()){
+        delete[] array;
+        this->front = -1;
+        this->back = -1;
+        this-> capacity = 10;
+        array = new T[capacity];
+        cout<<"You removed all the elements"<<endl;
+    }
+    else{
+        cout<<"This arraycircular is empty"<<endl;
+    }
+}
+
+
+template<typename T >
+T& CircularArray<T>::operator[](const int position){
+    if( (position < 0)  ||  ( position > 3 )) throw std::out_of_range( "index invalide");
+    else{
+        int index = front;
+        for(auto i=0; i<position; i++){
+            index=next(index);
+        }
+        return this-> array[index];
+    }
+
+}
+
+
+template<typename T>
+void CircularArray<T>::reverse(){
+    if(!is_empty()){
+        int start = front;
+        int end = back;
+
+        while(start != end){
+            std::swap(this->array[start] , this->array[end]);
+            start = next(start);
+            end = prev( end);
+        }
+
+    }
+}
+
+
+
 template<class T>
 int CircularArray<T>::prev(int pos) {
     if (pos == 0)

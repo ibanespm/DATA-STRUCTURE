@@ -1,8 +1,12 @@
 #paths
+
 /cmake-build-debug/
 /.idea/
+/.cmake-build-debug/
+
 #files
 
 *.CMakeLists.txt
 *.txt
 *.idea
+*.
