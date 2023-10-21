@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
     void push_back(T data);  //ok
     void pop_front( ); //ok
     void pop_back( ); //ok
-    void insert(T data, int position);
+    void insert(T data, int position); //ok not funtional
     bool is_empty(); //ok
     bool is_full(); //ok
     void resize(); //ok
@@ -34,6 +35,10 @@ public:
 private:
     int next(int);
     int prev(int);
+
+    //metodes the sort
+    void merge(int left,int middle, int right);
+    void mergeSort(int left, int right);
 };
 
 
@@ -62,48 +67,50 @@ void CircularArray<T>::push_front(T data) {
          resize();
          this->front=(capacity +front -1)%capacity;
          this->array[front]=data;
-    }
 
+
+    }
 }
+
 
 template<typename T>
 void CircularArray<T>::push_back(T data) {
 
-    if(!is_empty() and !is_full()){
-        this->back=back+1;
-        this->array[back]=data;
+    if(!is_empty() && !is_full()){
+        back = (back + 1) % capacity;
+        this->array[back] = data;
+
     }
     else if(is_full()){
         resize();
         this->back=back+1;
         this->array[back]=data;
+
     }
     else if(is_empty()) {
         this->back = (back + 1) % capacity;
         this->front=0;
         this->array[back] = data;
-        cout<<"entra:"<<data<<endl;
-    }
 
+    }
 }
 
 
 template<typename T>
 void CircularArray<T>::pop_front(){
     if(!is_empty()){
-        if(front ==this->capacity-1)
-            this->front=0;
-
-        else if (front == back)
-            this->front=this->back=-1;
-
-        else
-            this->front=front+1;
-
+        if(front ==this->capacity-1) {
+            this->front = 0;
+        }
+        else if (front == back) {
+            this->front = this->back = -1;
+        }
+        else {
+            this->front = front + 1;
+        }
     }
     else {
         cout << "Is empty Array Circular" << endl;
-
     }
 }
 
@@ -112,27 +119,44 @@ template<typename T>
 void CircularArray<T>::pop_back(){
 
     if(!is_empty()){
-        if(front == back)
-            this->front =this->back=-1;
-        else if(back==0 and front!=0)
-            this -> back =capacity-1;
-        else{
-            back-1;
-        }
+        if(front == back) {
+            this->front = this->back = -1;
 
+        }
+        else if(back==0 and front!=0) {
+            this->back = capacity - 1;
+        }
+        else{
+            back=back-1;
+        }
     }
     else{
         std::cout<<"The arraycircular is empty"<<endl;
     }
 }
-
 template<typename T>
-
 void CircularArray<T>::insert(T data, int position){
-    if ((position < 0) || ( position > capacity)) throw "Position invalue";
+    if (position < 0 || position > capacity)
+        cout<<"Entrate posicion invalida"<<endl;
 
+    if (is_full()) {
+        resize();
+    }
 
+    if (position == 0) {
+        push_front(data);
 
+    }
+    else if (position == size()) {
+        push_back(data);
+    }
+    else {
+        for (int i = size(); i > position; i--) {
+            array[next(i)] = array[i - 1];
+        }
+        this->array[next(position)] = data;
+        this->back = next(back);
+    }
 }
 
 
@@ -157,17 +181,22 @@ bool CircularArray<T>::is_full(){
 
 template <typename T>
 int CircularArray<T>::size() {
-    if((front == -1) and (back== -1))
+    if((front == -1) and (back== -1)) {
         return 0;
+    }
+
     else if(front > back){
         return (capacity -(front - back)+1);
     }
+
     else if(back> front){
         return (back-front + 1);
     }
+
     else if(front==0 and back==0){
         return 1;
     }
+
     else{
         cout<<"algo esta mal front:"<<front<<" back"<<back<<endl;
     }
@@ -210,13 +239,13 @@ void CircularArray<T>::clear() {
 
 template<typename T >
 T& CircularArray<T>::operator[](const int position){
-    if( (position < 0)  ||  ( position > 3 )) throw std::out_of_range( "index invalide");
+    if( (position < 0)  ||  ( position >=capacity )) cout<<"No valido [ ]"<<endl;
     else{
         int index = front;
         for(auto i=0; i<position; i++){
-            index=next(index);
+            index = next(index);
         }
-        return this-> array[index];
+        return  array[index];
     }
 
 }
@@ -253,6 +282,42 @@ int CircularArray<T>::next(int pos) {
     return pos+1;
 }
 
+
+template<typename T>
+void CircularArray<T>::sort() {
+    if (!is_empty()) {
+        std::vector<T> temp(size());
+
+        for (int i = 0; i < size(); i++) {
+            temp[i] = this->array[(front + i) % capacity];
+        }
+        std::sort(temp.begin(), temp.end());
+
+        for (int i = 0; i < size(); i++) {
+            this->array[(front + i) % capacity] = temp[i];
+        }
+    }
+}
+
+template<typename T>
+bool CircularArray<T>::is_sorted() {
+    if (is_empty() || size() == 1) {
+        return true;
+    }
+
+    int current = front;
+    int next_element = next(current);
+
+    for (int i = 0; i < size() - 1; i++) {
+        if (array[current] > array[next_element]) {
+            return false;
+        }
+
+        current = next_element;
+        next_element = next(current);
+    }
+    return true;
+}
 
 
 

@@ -1,122 +1,38 @@
 #include <iostream>
 #include "ARRAY-CIRCULAR/CircularArray.h"
-#include <typeinfo>
+#include "ARRAY-CIRCULAR/tester.h"
+
 using namespace std;
 
-
-
 int main() {
-
-    //testing becth with int
-
-    CircularArray<int> *arra = new CircularArray<int>(6);
-
-    std::cout << "Capacidad: " << arra->getcapacity() << std::endl;
-    std::cout <<"is full:"<<arra->is_full()<<endl;
-    std::cout<<"is empty:"<<arra->is_empty()<<endl;
-    std::cout<<"is size : "<<arra->size()<<endl;
-    std::cout << "Contenido: " << arra->to_string(" ") << std::endl;
-    std::cout<<endl;
-
-
-    cout<<"------push_back---------"<<endl;
-    arra->push_back(1);
-    arra->push_back(2);
-    arra->push_back(3);
-    arra->push_back(4);
-    arra->push_back(5);
-    arra->push_back(6);
-    std::cout << "Capacidad: " << arra->getcapacity() << std::endl;
-    std::cout <<"is full:"<<arra->is_full()<<endl;
-    std::cout<<"is empty:"<<arra->is_empty()<<endl;
-    std::cout<<"is size : "<<arra->size()<<endl;
-    std::cout << "Contenido: " << arra->to_string(" ") << std::endl;
-    std::cout<<endl;
-
-    cout<<"------push_front---------";
-    arra->push_front(10);
-    arra->push_front(20);
-    arra->push_front(30);
-    arra->push_front(40);
-    arra->push_front(50);
-
-    std::cout<<endl;
-    std::cout << "Capacidad: " << arra->getcapacity() << std::endl;
-    std::cout <<"is full:"<<arra->is_full()<<endl;
-    std::cout<<"is empty:"<<arra->is_empty()<<endl;
-    std::cout<<"is size : "<<arra->size()<<endl;
-    std::cout << "Contenido: " << arra->to_string(" ") << std::endl;
-
-    //delete element front
-    std::cout<<"------pop_front------"<<endl;
-    arra->pop_front();
-    arra->pop_front();
-    arra->pop_front();
-    arra->pop_front();
-
-
-    std::cout << "Capacidad: " << arra->getcapacity() << std::endl;
-    std::cout <<"is full:"<<arra->is_full()<<endl;
-    std::cout<<"is empty:"<<arra->is_empty()<<endl;
-    std::cout<<"is size : "<<arra->size()<<endl;
-    std::cout << "Contenido: " << arra->to_string(" ") << std::endl;
-
-    std::cout<<endl;
-    std::cout<<"pop_back"<<endl;
-    arra->pop_back();
-    arra->pop_back();
-    arra->pop_back();
-
-    std::cout << "Capacidad: " << arra->getcapacity() << std::endl;
-    std::cout <<"is full:"<<arra->is_full()<<endl;
-    std::cout<<"is empty:"<<arra->is_empty()<<endl;
-    std::cout<<"is size : "<<arra->size()<<endl;
-    std::cout << "Contenido: " << arra->to_string(" ") << std::endl;
-
-    std::cout<<"----------------------------------------------------------------"<<endl;
-
-
-
-
-    //arra->pop_back();
-
-
-
-
-
-
-
-
-
-
-    std::cout<<6%7<<endl;
-    CircularArray<char> *arr=new CircularArray<char>(5);
-    arr->push_front('a');
-    arr->push_front('b');
-    arr->push_front('c');
-    arr->push_front('d');
-
-    std::cout << "Contenido: " << arr->to_string(" ") << std::endl;
-    arr->pop_front();
-    std::cout << "Contenido: " << arr->to_string(" ") << std::endl;
-    arr->pop_back();
-    std::cout << "Contenido: " << arr->to_string(" ") << std::endl;
-    arr->push_front('l');
-    std::cout << "Contenido: " << arr->to_string(" ") << std::endl;
-    std::cout << "Contenido: " << arr->to_string(" ") << std::endl;
-    arr->reverse();
-    std::cout << "Contenido: " << arr->to_string(" ") << std::endl;
-
-    std::cout<<(*arr)[2]<<endl;
-
-
-
-
-
-
-// Comprueba que el primer elemento 'X' se ha eliminado y que front se ha ajustado para rebobinar circularmente.
-
-     std::cout<<std::to_string('s');
-     return 0;
+    CircularArray<int>* array = new CircularArray<int>(7);
+    ASSERT(array->is_empty() == true, "The function is_empty is not working");
+    array->push_back(6);
+    array->push_back(3);
+    array->push_back(7);
+    array->push_back(8);
+    array->push_back(1);
+    ASSERT(array->is_empty() == false, "The function is_empty is not working");
+    ASSERT(array->is_full() == false, "The function is_full is not working");
+    array->push_front(10);
+    array->push_front(2);
+    ASSERT(array->is_full() == true, "The function is_full is not working");
+    ASSERT(array->to_string() == "2 10 6 3 7 8 1 ", "The function push_front is not working");
+    array->pop_front();
+    array->pop_front();
+    array->pop_front();
+    array->push_back(15);
+    array->push_back(9);
+    array->push_back(4);
+    ASSERT((*array)[0] == 3 && (*array)[6] == 4, "The operator [] is not working");
+    ASSERT(array->is_sorted() == false, "The function is_sorted is not working");
+    array->sort();
+    ASSERT(array->to_string() == "1 3 4 7 8 9 15 ", "The function sort is not working");
+    array->reverse();
+    ASSERT(array->to_string() == "15 9 8 7 4 3 1 ", "The function reverse is not working");
+    array->insert(10, 1);
+    array->pop_back();
+    ASSERT(array->size() == 7, "The function size is not working");
+    delete array;
+    return 0;
 }
-
