@@ -4,6 +4,7 @@
 
 using namespace std;
 
+// Definición de una clase plantilla (template) CircularArray
 template<class T>
 class CircularArray{
 private:
@@ -13,34 +14,71 @@ private:
     int capacity;
 
 public:
+    // Constructor predeterminado
     CircularArray();
-    CircularArray<T>(int _capacity=10);
-    void push_front(T data); //ok
-    void push_back(T data);  //ok
-    void pop_front( ); //ok
-    void pop_back( ); //ok
-    void insert(T data, int position); //ok not funtional
-    bool is_empty(); //ok
-    bool is_full(); //ok
-    void resize(); //ok
-    int size();//ok
-    void clear(); //ok
-    T& operator[](const int position); //ok
+
+    // Constructor con capacidad específica (tamaño)
+    CircularArray<T>(int _capacity = 10);
+
+    // Inserta un elemento al frente de la cola
+    void push_front(T data);
+
+    // Inserta un elemento al final de la cola
+    void push_back(T data);
+
+    // Elimina el elemento del frente de la cola
+    void pop_front();
+
+    // Elimina el elemento del final de la cola
+    void pop_back();
+
+    // Inserta un elemento en una posición específica (no funcional)
+    void insert(T data, int position);
+
+    // Verifica si la cola está vacía
+    bool is_empty();
+
+    // Verifica si la cola está llena
+    bool is_full();
+
+    // Aumenta la capacidad de la cola (redimensiona)
+    void resize();
+
+    // Obtiene el tamaño actual de la cola
+    int size();
+
+    // Limpia la cola y restaura su capacidad
+    void clear();
+
+    // Sobrecarga del operador [] para acceder a elementos por posición
+    T& operator[](const int position);
+
+    // Ordena los elementos de la cola
     void sort();
+
+    // Verifica si la cola está ordenada
     bool is_sorted();
-    void reverse(); //ok
-    int getcapacity(){return capacity;} //ok
-    string to_string(string sep=" ");  //ok
+
+    // Invierte el orden de los elementos en la cola
+    void reverse();
+
+    // Obtiene la capacidad actual de la cola
+    int getcapacity() { return capacity; }
+
+    // Convierte la cola a una cadena de texto con separador opcional
+    string to_string(string sep = " ");
 
 private:
+    // Calcula el siguiente índice circular
     int next(int);
+
+    // Calcula el índice circular previo
     int prev(int);
 
-    //metodes the sort
-    void merge(int left,int middle, int right);
+    // Métodos de ordenamiento
+    void merge(int left, int middle, int right);
     void mergeSort(int left, int right);
 };
-
 
 
 template<typename T>
