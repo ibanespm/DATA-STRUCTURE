@@ -1,8 +1,11 @@
-# FORWARD LIST
+# **LINKED LIST**
 ********************
+![forwardList](arrayVsLinkdList.png)
 
+Como vemos en la imagen, a diferencia de los arrays el <b>Linked list</b> pueden ser almacenado en diferentes sectores de la
+memoria, los cuales son referenciados por punteros.
 
-### CLASIFICACION LISTA ENLAZADAS
+## **CLASIFICACION LISTA ENLAZADAS**
 
 #### LISTA SIMPLEMENTE ENLAZADA
 - Eficientes ene recorridos directos.
@@ -17,7 +20,7 @@
 - El ultimos elemento se enlaza con el primer elemento, por ello hace un recorrido circular.
 - El primer elemento se enlaza con el ultimo elemento.
 
-![forwardList]()
+
 ## COMPLEJIDAD
 ***
 
@@ -38,8 +41,10 @@
 ## COMENTARIOS ADICIONALES
 ***
 
-- Se implementaron todos los métodos, y el método `sort` se complementó con la librería `algorithm`, aunque se podría implementar nuestro propio método.
 - Para ejecutar el código y conocer las funcionalidades de los métodos, se utilizó `tester.h`.
 - Se agregaron las complejidades de los métodos para determinar cuándo es conveniente utilizar CircularArray.
-- La implementación puede aceptar tipos de datos como `int`, `float` y `char`.
--
+- No tienen un tamaño fijo (ventaja)
+- Facil de realizar remover y agregar (ventaja).
+- Ocupa mas espacio para cada uno de los elementos(desventaja).
+- No es amigable con la memoria cache(desventaja).
+
