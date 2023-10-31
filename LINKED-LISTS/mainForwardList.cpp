@@ -8,6 +8,7 @@
 #include "doubleList.h"
 #include "circularDoubleList.h"
 
+
 using namespace std;
 
 void test(List<int>* list){
@@ -37,14 +38,12 @@ void test(List<int>* list){
 int main()
 {
 
-
-    List<int> *circular = new CircularList<int>();
-    test(circular);
+//    List<int> *circular = new CircularList<int>();
+//    test(circular);
     List<int> *forward = new ForwardList<int>();
     test(forward);
-
-    List<int> *doble = new DoubleList<int>();
-    test(doble);
+//    List<int> *doble = new DoubleList<int>();
+//    test(doble);
 
     return 0;
 }
