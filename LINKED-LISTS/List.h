@@ -1,8 +1,11 @@
+#ifndef LIST_H
+#define LIST_H
 
 //
 // Created by IBAÑES on 30/10/2023.
 //
 #include <string>
+using namespace std;
 
 //CLASE PADRE DE LIKED LIST
 template<class T>
@@ -32,11 +35,10 @@ public:
     virtual bool is_sorted() = 0;
     virtual void reverse() = 0;
     virtual std::string name() = 0;
+    virtual std::string to_string() = 0;
+
+    virtual int getNodes()= 0;
 
 };
 
-
-#ifndef DATA_STRUCTURE_LIST_H
-#define DATA_STRUCTURE_LIST_H
-
-#endif //DATA_STRUCTURE_LIST_H
+#endif // LIST_H

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -370,13 +371,16 @@ string CircularArray<T>::to_string(string sep) {
 
     if(!is_empty()) {
         for(int i = 0; i < size(); i++) {
-            if constexpr (std::is_same_v<T, char>) { // el is_same_v verifica que el tipo T sea de char y
-                                                     // el stactic_cast se asegura que el tipo char se el correcto
 
-                final_string += static_cast<char>(array[pos]) + sep;
-            } else {
-                final_string += std::to_string(array[pos]) + sep;
-            }
+            // if constexpr (std::is_same_v<T, char>) { // el is_same_v verifica que el tipo T sea de char y
+            //                                          // el stactic_cast se asegura que el tipo char se el correcto
+
+            //     final_string += static_cast<char>(array[pos]) + sep;
+            // } else {
+            //     final_string += std::to_string(array[pos]) + sep;
+            // }
+            
+            final_string += std::to_string(array[pos]) + sep;
             pos = next(pos);
         }
     }
