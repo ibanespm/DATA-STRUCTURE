@@ -6,6 +6,8 @@
 
 
 
+
+
 template<class T>
 struct  NodeDoubleList{
     NodeDoubleList<T>* prev;

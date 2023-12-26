@@ -1,3 +1,8 @@
+#ifndef DATA_STRUCTURE_FORWARDLIST_H
+#define DATA_STRUCTURE_FORWARDLIST_H
+
+
+
 #include <iostream>
 #include "List.h"
 #include <string>
@@ -126,6 +131,10 @@ public:
         clear();
         delete head;
     };
+
+
+
+    // METODOS
 
     T front();
     T back();
@@ -271,14 +280,17 @@ T ForwardList<T>:: insert(T data, int pos){
     return data;
 }
 
+//devuelve el tamaño de la lista
 template<typename T>
 int ForwardList<T>::size() {return nodes;}
+
 
 //verifica  si esta vacio
 template<typename T>
 bool ForwardList<T>::is_empty() {
     return  !nodes;
 }
+
 
 //elemina todos los nodos
 template<typename T>
@@ -309,6 +321,8 @@ bool ForwardList<T>::remove(int pos) {
     }
     return true;
 }
+
+
 //arncceder con indice[ ]
 template<typename T>
 T& ForwardList<T>::operator[](int position) {
@@ -319,8 +333,8 @@ T& ForwardList<T>::operator[](int position) {
         Node<T>* node  = get_node(position);
         return node->data;
     }
-
 }
+
 
 //ordenamiento de los nodos
 template<typename T>
@@ -344,9 +358,12 @@ bool ForwardList<T>::is_sorted() {
 
 }
 
+
 //revierte los elementos
 template<typename T>
 
+
+//invierte la lista
 void ForwardList<T>::reverse(){
     if(nodes <= 1) return;
     // It's all about updating tha link part of the nodes and head pointer
@@ -368,6 +385,8 @@ string ForwardList<T>::name() {
     return "Forward List";
 
 }
+
+// muestra los elementos de la lista double
 template<typename T>
 string ForwardList<T>::to_string() {
     string result = "";
@@ -380,7 +399,5 @@ string ForwardList<T>::to_string() {
 }
 
 
-#ifndef DATA_STRUCTURE_FORWARDLIST_H
-#define DATA_STRUCTURE_FORWARDLIST_H
 
 #endif //DATA_STRUCTURE_FORWARDLIST_H

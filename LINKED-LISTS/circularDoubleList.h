@@ -5,6 +5,13 @@
 #include <iostream>
 #include "list.h"
 
+
+// CLASS DOUBLE LIST
+/*Implementacion de class doublue list, con los metodos que estan en la parte publica de la clase
+   */
+
+
+
 template<class T>
 struct CircularNodeDoubleList {
     CircularNodeDoubleList<T>* prev;
