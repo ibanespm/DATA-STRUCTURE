@@ -2,6 +2,10 @@
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
+
+// DECLARACION DE LA CLASS HASH TABLE 
+
+
 template<typename KEY, typename VALUE>
 class HashTable {
 public:

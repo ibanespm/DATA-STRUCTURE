@@ -4,6 +4,12 @@
 #include "hashTable.h"
 #include <list>
 
+
+
+//CLASS HASH TABLE TIPO CHAININGHASHTABLE
+/* 
+   Los metodos hereda de la HASHTABLE
+   */
 template<typename KEY, typename VALUE>
 class ChainingHashTable : public HashTable<KEY, VALUE> {
 private:
@@ -11,13 +17,23 @@ private:
     int capacity;
 
 public:
+
+    /*CONSTRUCTOR*/
+
     ChainingHashTable(int capacity);
+
+    /*METODOS*/
+
     void insert(const KEY &key, const VALUE &value) override;
     bool search(const KEY &key, VALUE &value) const override;
     bool remove(const KEY &key, VALUE &value) override;
     void display() const override;
+
+    /*DESTRUCTOR*/
+
     ~ChainingHashTable() {};
 };
+
 
 template<typename KEY, typename VALUE>
 ChainingHashTable<KEY, VALUE>::ChainingHashTable(int capacity) : capacity(capacity), tableHash(capacity) {}
